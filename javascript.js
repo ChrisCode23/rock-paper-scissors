@@ -16,7 +16,7 @@ function getComputerChoice(){
 
 //Create a function which allows user to select "Rock", "Scissors" or "Paper" via a prompt, then store it into "userChoice"
 function getUserChoice(){
-    let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", " "); 
+    let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", ""); 
     //Store "userChoice" in variable "userChoiceToLC"
     //Use ternary operators so that it lowercase "userChoiceToLC" to make it case-insensitive; if the user doesn't type anything, return null
     let userChoiceToLC = (userChoice ? userChoice.toLowerCase() : null); 
