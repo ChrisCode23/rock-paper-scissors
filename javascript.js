@@ -12,14 +12,17 @@ function getComputerChoice(){
 
 //Create a function which allows user to select "Rock", "Scissors" or "Paper" via a prompt, then store it into "userChoice"
 function getUserChoice(){
-    let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", " ").toLowerCase(); //Make the choice case-insensitive with "toLowerCase"
+    let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", " "); 
+    //Store choice in variable "userChoiceToLC" and use "toLowerCase" to make it case-insensitive
+    //Use ternary operators so that if the user doesn't type anything, prompt doesn't turn to null thus avoiding error
+    let userChoiceToLC = (userChoice ? userChoice : " ").toLowerCase(); 
     //Create boolean variable "isFound" which determines if one of the values of "gameChoices" has been found
     let isFound = false;
 
     //Loop through all array elements in "gameChoices"
     for(let i = 0; i < gameChoices.length; i++){
         //Check if the data inserted by the user and stored into "userChoice" matches one of the array elements in "gameChoices"
-        if(gameChoices[i].toLowerCase() === userChoice){  //Use "toLowerCase" to make the array elements lowercase, so they can match "userChoice" 
+        if(gameChoices[i].toLowerCase() === userChoiceToLC){  //Use "toLowerCase" to make the array elements lowercase, so they can match "userChoice" 
                 isFound = true; //Set "isFound" to true as one of the values was found
                 return gameChoices[i];  //Return the respective choice (i.e. "Rock" will return "Rock", "ROCK" will return "Rock")
         } 
