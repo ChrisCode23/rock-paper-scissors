@@ -16,6 +16,7 @@ function getComputerChoice(){
 
 //Create a function which allows user to select "Rock", "Scissors" or "Paper" via a prompt, then store it into "userChoice"
 function getUserChoice(){
+    //Loop with "while" until one of the values is found
     while(!isFound){
     let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", ""); 
     //Store "userChoice" in variable "userChoiceToLC"
@@ -31,13 +32,14 @@ function getUserChoice(){
                 return gameChoices[i];  //Return the respective choice (i.e. "Rock" will return "Rock", "ROCK" will return "Rock")
         } 
     }
-}
     //Output an error message if user doesn't type anything or if one of the values in "gameChoices" was not found
     if(!isFound && !userChoice){
         alert("You must make a choice!"); 
     }else if(!isFound && userChoice){
         alert("Incorrect Choice");
     }
+}
+    
 }
 
  //Create two variables "humanSelection" & "computerSelection" and within them store the "get...Choice" functions
@@ -52,7 +54,6 @@ function playRound(humanChoice, computerChoice){
     if(isFound){
     //Increase "roundCount"
     roundCount++;
-    console.log(roundCount);
     console.log(computerChoice);
 
     //Add if conditionals that check all possible outcomes, output result to console, increase score based on who won and output score
