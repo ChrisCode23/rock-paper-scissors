@@ -4,7 +4,7 @@ let gameChoices = ["Rock", "Paper", "Scissors"];
 let humanScore = 0;
 let computerScore = 0;
  //Create boolean global variable "isFound" which determines if one of the values of "gameChoices" has been found
-let isFound
+let isFound = false;
 //Keep track of the number of rounds played and store it in "roundCount"
 let roundCount = 0;
 
@@ -16,12 +16,12 @@ function getComputerChoice(){
 
 //Create a function which allows user to select "Rock", "Scissors" or "Paper" via a prompt, then store it into "userChoice"
 function getUserChoice(){
+    while(!isFound){
     let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", ""); 
     //Store "userChoice" in variable "userChoiceToLC"
     //Use ternary operators so that it lowercase "userChoiceToLC" to make it case-insensitive; if the user doesn't type anything, return null
     let userChoiceToLC = (userChoice ? userChoice.toLowerCase() : null); 
-    //Change "isFound" to false, so that every time a round runs, it will be false by default unless one of the values in "gameChoices" has been found
-    isFound = false;
+    
 
     //Loop through all array elements in "gameChoices"
     for(let i = 0; i < gameChoices.length; i++){
@@ -31,9 +31,10 @@ function getUserChoice(){
                 return gameChoices[i];  //Return the respective choice (i.e. "Rock" will return "Rock", "ROCK" will return "Rock")
         } 
     }
+}
     //Output an error message if user doesn't type anything or if one of the values in "gameChoices" was not found
     if(!isFound && !userChoice){
-        alert("You must make a choice!");
+        alert("You must make a choice!"); 
     }else if(!isFound && userChoice){
         alert("Incorrect Choice");
     }
@@ -51,6 +52,7 @@ function playRound(humanChoice, computerChoice){
     if(isFound){
     //Increase "roundCount"
     roundCount++;
+    console.log(roundCount);
     console.log(computerChoice);
 
     //Add if conditionals that check all possible outcomes, output result to console, increase score based on who won and output score
@@ -82,6 +84,7 @@ function playRound(humanChoice, computerChoice){
     else{
         return;    
     }
+    isFound = false;
 }
 
 //Create function "playGame" to play the entire game
@@ -110,7 +113,7 @@ function playGame(){
             }else if(computerScore > humanScore){
                 console.log("CPU won the game!");
             }else{
-                console("The game ended in a tie!");
+                console.log("The game ended in a tie!");
             }
             return;
     }
