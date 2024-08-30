@@ -1,5 +1,8 @@
 //Store an array global variable "gameChoices" which includes "Rock", "Scissors" and "Paper"
 let gameChoices = ["Rock", "Paper", "Scissors"];
+//Create variables "humanScore" & "computerScore" to keep track of game score and assign initial value 0 to both
+let humanScore = 0;
+let computerScore = 0;
 
 //Create a function which randomly returns "Rock", "Scissors" or "Paper" array element for the computer
 function getComputerChoice(){
