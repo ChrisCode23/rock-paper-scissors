@@ -4,7 +4,9 @@ let gameChoices = ["Rock", "Paper", "Scissors"];
 let humanScore = 0;
 let computerScore = 0;
  //Create boolean global variable "isFound" which determines if one of the values of "gameChoices" has been found
-let isFound;
+let isFound
+//Keep track of the number of rounds played and store it in "roundCount"
+let roundCount = 0;
 
 
 //Create a function which randomly returns "Rock", "Scissors" or "Paper" array element for the computer
@@ -38,8 +40,8 @@ function getUserChoice(){
 }
 
  //Create two variables "humanSelection" & "computerSelection" and within them store the "get...Choice" functions
- const humanSelection = getUserChoice();
- const computerSelection = getComputerChoice();
+ let humanSelection = getUserChoice();
+ let computerSelection = getComputerChoice();
 
 //Create function "playRound" for a single round and use "humanChoice" & "computerChoice" as arguments
 function playRound(humanChoice, computerChoice){
@@ -47,6 +49,8 @@ function playRound(humanChoice, computerChoice){
     console.log(humanChoice);
     //If user entered value matches one of the choices, proceed with the game
     if(isFound){
+    //Increase "roundCount"
+    roundCount++;
     console.log(computerChoice);
 
     //Add if conditionals that check all possible outcomes, output result to console, increase score based on who won and output score
@@ -78,8 +82,41 @@ function playRound(humanChoice, computerChoice){
     else{
         return;    
     }
-
-    
-   
 }
-playRound(humanSelection, computerSelection);
+
+//Create function "playGame" to play the entire game
+function playGame(){
+    
+
+    playRound(humanSelection, computerSelection);
+    humanSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    humanSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    humanSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    humanSelection = getUserChoice();
+    computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+
+    //Make this a five rounds game, where the player with most points wins
+    switch(roundCount){
+        case 5:
+            if(humanScore > computerScore){
+                console.log("Player won the game!");
+            }else if(computerScore > humanScore){
+                console.log("CPU won the game!");
+            }else{
+                console("The game ended in a tie!");
+            }
+            return;
+    }
+
+
+
+}
+
+playGame();
