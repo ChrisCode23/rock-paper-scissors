@@ -9,19 +9,20 @@ function getComputerChoice(){
 //Create a function which allows user to select "Rock", "Scissors" or "Paper" via a prompt, then store it into "userChoice" and return the variable
 function getUserChoice(){
     let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", " ");
+    //Create boolean variable "isFound" which determines if one of the values of "gameChoices" has been found
+    let isFound = false;
 
-    //Loops through all array elements in "gameChoices", and if "userChoice" equals one of the array elements, returns "userChoice"
-    for(let i = 0; i < gameChoices.length; i++)
-        
-        //Checks if the data inserted by the user and stored into "userChoice" matches one of the choices in "gameChoices"
-        {
+    //Loop through all array elements in "gameChoices"
+    for(let i = 0; i < gameChoices.length; i++){
+        //Check if the data inserted by the user and stored into "userChoice" matches one of the array elements in "gameChoices"
         if(gameChoices[i] === userChoice   
-            || gameChoices[i].toUpperCase() === userChoice    //Makes the data inserted by user case insensitive, same as next line
+            || gameChoices[i].toUpperCase() === userChoice  //Make the data inserted by user case insensitive, same as next line
             || gameChoices[i].toLowerCase() === userChoice){
-                return gameChoices[i];    //Returns the respective choice (i.e. "Rock" will return "Rock", "ROCK" will return "Rock")
-        } else {
-            alert ("Incorrect Choice!");
-        }
+                isFound = true; //Set "isFound" to true as one of the values was found
+                return gameChoices[i];  //Return the respective choice (i.e. "Rock" will return "Rock", "ROCK" will return "Rock")
+        } 
     }
+    //Output an error message as one of the values in "gameChoices" was not found
+    if(!isFound){alert("Incorrect Choice");}    
 }
 console.log(getUserChoice());
