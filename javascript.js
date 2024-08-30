@@ -4,6 +4,7 @@ let gameChoices = ["Rock", "Paper", "Scissors"];
 let humanScore = 0;
 let computerScore = 0;
 
+
 //Create a function which randomly returns "Rock", "Scissors" or "Paper" array element for the computer
 function getComputerChoice(){
     return gameChoices[Math.floor(Math.random() * gameChoices.length)];
@@ -28,4 +29,43 @@ function getUserChoice(){
     //Output an error message as one of the values in "gameChoices" was not found
     if(!isFound){alert("Incorrect Choice");}    
 }
-console.log(getUserChoice());
+
+ //Create two variables "humanSelection" & "computerSelection" and within them store the "get...Choice" functions
+ const humanSelection = getUserChoice();
+ const computerSelection = getComputerChoice();
+
+//Create function "playRound" for a single round and use "humanChoice" & "computerChoice" as arguments
+function playRound(humanChoice, computerChoice){
+    //Output to console the choice made by the user and the computer
+    console.log(humanChoice);
+    console.log(computerChoice);
+
+    //Add if conditionals that check all possible outcomes, output result to console, increase score based on who won and output score
+    //If human wins
+    if(humanChoice === "Paper" && computerChoice === "Rock" //Paper beats Rock
+        || humanChoice === "Scissors" && computerChoice === "Paper" //Scissors beat Paper
+        || humanChoice === "Rock" && computerChoice === "Scissors"  //Rock beats Scissors
+    ){
+        console.log(humanChoice + " beats " + computerChoice);
+        humanScore++;
+        console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
+    }
+    //If it's a tie (i.e. Human and Computer both choose Rock), don't increase score
+    else if(humanChoice === "Paper" && computerChoice === "Paper"
+            || humanChoice === "Scissors" && computerChoice === "Scissors"
+            || humanChoice === "Rock" && computerChoice === "Rock"
+    ){ 
+        console.log("It's a tie!");
+        console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
+    } 
+    //If computer wins
+    else{
+        console.log(computerChoice + " beats " + humanChoice);
+        computerScore++;
+        console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
+    }
+
+    
+   
+}
+playRound(humanSelection, computerSelection);
