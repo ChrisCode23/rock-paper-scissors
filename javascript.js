@@ -19,29 +19,17 @@ function getComputerChoice(){
 // Allows user to select "Rock", "Scissors" or "Paper" via a prompt
 function getUserChoice(){
     // Loop until one of the values is found
-    while (!isFound){
-        let userChoice = prompt("What do you choose: Rock, Scissors or Paper?", ""); 
-        // Makes input case-insensitive
-        let userChoiceToLC = (userChoice ? userChoice.toLowerCase() : null); 
-        
-        // Loop through all array elements in "gameChoices"
-        for (let i = 0; i < gameChoices.length; i++) {
-            // Checks if user data matches one of the game choices
-            // toLowerCase() used to keep case-insensitivity
-            if (gameChoices[i].toLowerCase() === userChoiceToLC) { 
-                    isFound = true;
-                    return gameChoices[i]; 
-            } 
-        }
-        // Output error message if user doesn't type anything or if text doesn't match one of game choices
-        if (!isFound && !userChoice) {
-            alert("You must make a choice!"); 
-        } else if (!isFound && userChoice) {
-            alert("Incorrect Choice");
-        }
-}
     
-}
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                return "Rock";
+            });
+        });
+        
+};
+    
 
 // Used as callback in "playGame"
 let humanSelection = getUserChoice();
@@ -50,12 +38,15 @@ let computerSelection = getComputerChoice();
 // Controls a single round
 function playRound(humanChoice, computerChoice) {
 
-    console.log(humanChoice);
-    
-    // Proceeds only if user entered correct data
-    if (isFound) {
         roundCount++;
-        console.log(computerChoice);
+
+        const result = document.createElement("div");
+        result.setAttribute("class", "result");
+        result.textContent = `Round n.${roundCount}: You chose ${humanChoice} while computer chose ${computerChoice} `;
+
+        
+
+        document.body.appendChild(result);
 
         // Checks who won the round and updates score
         
@@ -64,73 +55,73 @@ function playRound(humanChoice, computerChoice) {
             || humanChoice === "Scissors" && computerChoice === "Paper" 
             || humanChoice === "Rock" && computerChoice === "Scissors"  
         ) {
-            console.log(humanChoice + " beats " + computerChoice);
+            result.textContent += '- You win the round!';
             humanScore++;
-            console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
         }
         // If it's a tie
         else if (humanChoice === "Paper" && computerChoice === "Paper"
                 || humanChoice === "Scissors" && computerChoice === "Scissors"
                 || humanChoice === "Rock" && computerChoice === "Rock"
         ) { 
-            console.log("It's a tie!");
-            console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
+            result.textContent += '- It\'s a tie!';
         } 
         // If computer wins
         else {
-            console.log(computerChoice + " beats " + humanChoice);
+            result.textContent += '- You lost the round!';
             computerScore++;
-            console.log("Score: Player " + humanScore + " " + "Computer " + computerScore);
         }
     }
-    // Otherwise stop the game
-    else {
-        return;    
-    }
-    isFound = false;
-}
+    
+
 
 // Controls the entire game
 function playGame() {
     
+    const buttons = document.querySelectorAll("button");
+    const winner = document.createElement("h3");
+    const isOver = false;
 
-    playRound(humanSelection, computerSelection);
+    // Game will create a score div, but only appears once user clicks a button and gets updated every time
+    const score = document.createElement("div");
 
-    humanSelection = getUserChoice();
-    computerSelection = getComputerChoice();
+    // Round is played only once user clicks a button
+   
+        buttons.forEach((button) => {
+        
+            button.addEventListener("click", () => {
+            
+            // Round doesn't play if one of the players has a score of 5
+            if(humanScore < 5 && computerScore < 5) {
 
-    playRound(humanSelection, computerSelection);
+                humanSelection = button.id;
+                computerSelection = getComputerChoice();
 
-    humanSelection = getUserChoice();
-    computerSelection = getComputerChoice();
+            
+                playRound(humanSelection, computerSelection);
 
-    playRound(humanSelection, computerSelection);
+                
+                score.setAttribute("class", "score");
+                score.textContent = `Score: Player ${humanScore} | Computer ${computerScore}`;
 
-    humanSelection = getUserChoice();
-    computerSelection = getComputerChoice();
+                document.body.appendChild(score);
 
-    playRound(humanSelection, computerSelection);
+                if (humanScore === 5) {
+                    winner.textContent = "Player has won the game!";
 
-    humanSelection = getUserChoice();
-    computerSelection = getComputerChoice();
+                    document.body.appendChild(winner);
+                } else if (computerScore === 5) {
+                    winner.textContent = "Computer has won the game!";
+
+                    document.body.appendChild(winner);
+                }
+            } 
+                
+            });
+
+            
+        });
     
-    playRound(humanSelection, computerSelection);
-
-    // Make this a five rounds game, where the player with most points wins
-    switch (roundCount) {
-        case 5:
-            if (humanScore > computerScore){
-                console.log("Player won the game!");
-            } else if (computerScore > humanScore){
-                console.log("CPU won the game!");
-            } else {
-                console.log("The game ended in a tie!");
-            }
-            return;
-    }
-
-
-
 }
+
 
 playGame();
