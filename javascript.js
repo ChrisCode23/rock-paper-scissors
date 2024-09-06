@@ -15,25 +15,10 @@ let roundCount = 0;
 function getComputerChoice(){
     return gameChoices[Math.floor(Math.random() * gameChoices.length)];
 }
-
-// Allows user to select "Rock", "Scissors" or "Paper" via a prompt
-function getUserChoice(){
-    // Loop until one of the values is found
     
-        const buttons = document.querySelectorAll("button");
-
-        buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-                return "Rock";
-            });
-        });
-        
-};
-    
-
 // Used as callback in "playGame"
-let humanSelection = getUserChoice();
-let computerSelection = getComputerChoice();
+let humanSelection;
+let computerSelection;
 
 // Controls a single round
 function playRound(humanChoice, computerChoice) {
@@ -79,7 +64,7 @@ function playGame() {
     
     const buttons = document.querySelectorAll("button");
     const winner = document.createElement("h3");
-    const isOver = false;
+
 
     // Game will create a score div, but only appears once user clicks a button and gets updated every time
     const score = document.createElement("div");
